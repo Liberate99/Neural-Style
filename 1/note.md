@@ -117,6 +117,8 @@ K 可以通过使用 **正则化的风格补丁** <img src="./imgs/normalized-pa
 
 <img src="./imgs/loss.png"  style="width: 800px"></img>
 
+- NOTE:
+    + total variation regularization: 全变差正则化
 
 
 
