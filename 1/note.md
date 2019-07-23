@@ -118,7 +118,74 @@ K 可以通过使用 **正则化的风格补丁** <img src="./imgs/normalized-pa
 <img src="./imgs/loss.png"  style="width: 800px"></img>
 
 - NOTE:
-    + total variation regularization: 全变差正则化
+    + LTV: total variation regularization: 全变差正则化，使用此项来对图像重新上采样的结果进行平滑，其算法如下：
+    <img src="./imgs/ltv.png"  style="width: 800px"></img>
+
+    + <img src="./imgs/5.png"  style="width: 80px"></img>: 完整的内容激活区域
+
+### 反向网络
+
+通过使用另外的神经网络逼近最优值来提升优化速度。
+一旦这个网络被训练，它将可以用快的多的速度进行风格迁移，我们也将着重训练这个网络，从而使其能够适应新的风格和内容图片。
+<img src="./imgs/inverseNet.png"  style="width: 800px"></img>
+
+- NOTE:
+    + 函数f：确定的函数
+    + H：一个随机变量用以代表目标激活区域
+    + 全变差正则化项的作用同4一样
+
+#### 训练逆向网络
+
+##### 非注入
+使用一个参数神经网络来作为逆向卷积网络的代替品：
+<img src="./imgs/inverseNetS.png"  style="width: 800px"></img>
+
+##### 非推定
+训练时使用一对一对的训练集进行训练（图像对应其风格迁移后的图像）
+
+#### 前馈过程包括以下步骤
+<img src="./imgs/feedforwardSTEP.png"  style="width: 800px"></img>
+
+1 通过卷积网络获得 内容图 和 风格图 相应的结果      
+2 通过风格互换构建完整的激活区域   
+3 将激活区域放入训练好的逆向网络   
+
+
+
+
+本文章采用的方法将比现有方法是用更少次的迭代。
+
+通过调整patch size来改变
+
+## 逆向网络的训练
+
+将VGG-19从 input layer 删减到了 “Relu3_1”
+
+### 数据集：COCO + wikiart.org（kaggle）
+
+每个数据集都分别有大约 80000 个自然图片和画作。
+
+### 训练
+
+将每个图像大小调整为 250 x 250 像素
+
+再每个数据集上训练2个epoch
+
+每个 minibatch 使用 2个自然图像和 2个画作图像
+
+每个 minibatch 通过 使用4个风格转换过的 activation （两个natural image 用两个 style image进行风格交换）被增强
+
+variance regularization coefficient 十的负6次方
+
+优化器是 adam 学习率为 10的-3次方
+
+# 可改进
+
+lack of a global style measurement
+
+lack of a similarity measure for neighboring patches, both in the spatial domain and the temporal domain
+
+这些简化会牺牲质量来提高效率,但当应用于逐帧视频时,可能会偶尔导致局部闪烁效果。在保持算法的高效性和通用性的同时,最好寻找提高质量的方法。
 
 
 
