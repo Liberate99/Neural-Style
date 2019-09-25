@@ -26,6 +26,7 @@ Gatys等人的工作开辟了一个称为神经风格转移（NST）的新领域
 
     ***J. E. Kyprianidis, J. Collomosse, T. Wang, and T. Isenberg, “State of the ‘art’: A taxonomy of artistic stylization techniques for images and video,” IEEE transactions on visualization and computer graphics, vol. 19, no. 5, pp. 866–885, 2013.***
 
+
     ***A. Semmo, T. Isenberg, and J. Do ̈llner, “Neural style transfer: A paradigm shift for image-based artistic rendering?” in Proceedings of the Symposium on Non-Photorealistic Animation and Rendering. ACM, 2017, pp. 5:1–5:13***
 
 #### 主要方法
@@ -82,7 +83,8 @@ Gatys等人的工作开辟了一个称为神经风格转移（NST）的新领域
 
 ----
 
-## 2.神经网络风格迁移前导 DERIVATIONS OF NEURAL STYLE TRANSFER
+## 2.神经网络风格迁移前导
+DERIVATIONS OF NEURAL STYLE TRANSFER
 
 #### 如何对图像进行建模和风格提取       
 
@@ -102,8 +104,8 @@ Gatys等人的工作开辟了一个称为神经风格转移（NST）的新领域
 
     有两种不同的方法来建模视觉纹理
 
-- 摘要统计进行参数纹理建模
-    + gram-based 基于格拉姆矩阵(卷积网络)
+- 摘要统计进行参数纹理建模(卷积网络)
+    + gram-based 基于格拉姆矩阵
         * 获取纹理的gram矩阵表示的方法
         <img src="./imgs/gram.jpeg"></img>
 
